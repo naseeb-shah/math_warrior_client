@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseurl = "https://math-warrior-server-b3je.vercel.app/math/";
+const baseurl = "https://math-warrior-server-b3je.vercel.app/math/
 
 export const getToken = () => {
   return localStorage.getItem("token");
@@ -21,7 +21,7 @@ export const logIn = async (data) => {
     const result = res.data.data;
     localStorage.setItem("token", result.token);
     localStorage.setItem("username",result.user.username)
-    console.log(result)
+    
     return result;
   } catch (e) {
     console.log(e);
@@ -41,6 +41,7 @@ export const getProblem = async (num, type, digit, correct) => {
     };
 
     const data = await axios.get(url, config);
+    
     return data.data.data;
   } catch (e) {
     console.error(e);
@@ -50,7 +51,7 @@ export const getProblem = async (num, type, digit, correct) => {
 export const wrongProblem = async (problem) => {
   try {
     const url = `${baseurl}problem/wrong`;
-    console.log(url);
+    
     const token = getToken();
 
     const config = {
@@ -65,3 +66,24 @@ export const wrongProblem = async (problem) => {
     console.error(e);
   }
 };
+
+export const getProfile=async()=>{
+  try{
+    const url = `${baseurl}problem/profile`;
+    
+    const token = getToken();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    const data = await axios.get(url, config);
+    console.log(data.data.data)
+    return data.data.data;
+
+  }catch(e){
+
+  }
+}

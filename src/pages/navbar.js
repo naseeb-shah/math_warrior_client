@@ -22,7 +22,7 @@ const NavBar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
  let token=getToken()
  let username=localStorage.getItem("username")
- console.log(username,token)
+ 
   return (
     <Flex p={4} bg="teal.500" color="white">
       <IconButton

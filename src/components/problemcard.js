@@ -26,10 +26,10 @@ export const ProblemCard = ({type}) => {
   const [problemNumber,setProblemNumber]=useState(problem?.number||1)
 const onProblemSubmit=async()=>{
     const ans= eval(`${problem?.num}${problem?.type}${problem?.num2}`)
-    console.log(ans,answer)
+    
     if(ans==answer){
       setCorrect(true)
-        setProblemNumber(problemNumber+1)
+        setProblemNumber(+problemNumber+1)
 setCongratulations(true)
     }else{
        await wrongProblem(problem)

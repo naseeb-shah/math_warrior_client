@@ -1,6 +1,6 @@
 // App.js
 import React from 'react';
-import { Routes, Route, BrowserRouter } from 'react-router-dom';
+import { Routes, Route, BrowserRouter,useNavigate,Navigate } from 'react-router-dom';
 import { Box, ChakraProvider, CSSReset, extendTheme } from '@chakra-ui/react';
 import Login from './pages/login';
 import Signup from './pages/signup';  // Corrected import statement
@@ -10,7 +10,11 @@ import Sub from "./pages/subTract"
 import Divide from "./pages/divide"
 import Multi from "./pages/mulitplication"
 import NavBar from './pages/navbar';
+import { getToken } from './utils/api';
 const App = () => {
+  
+
+ 
   return (
     <BrowserRouter>
             <NavBar />
