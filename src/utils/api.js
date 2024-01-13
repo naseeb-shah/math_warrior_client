@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseurl = "https://math-warrior-server-b3je.vercel.app/math/
+const baseurl = "https://math-warrior-server-b3je.vercel.app/math/"
 
 export const getToken = () => {
   return localStorage.getItem("token");
@@ -80,7 +80,7 @@ export const getProfile=async()=>{
     };
 
     const data = await axios.get(url, config);
-    console.log(data.data.data)
+    
     return data.data.data;
 
   }catch(e){
