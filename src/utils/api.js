@@ -34,8 +34,8 @@ export const logIn=async(data)=>{
 
  export const  getProblem= async(num,type,digit)=>{
     try{
-const url=`${baseurl}/problem/${type}/${num}/${digit}`
-    
+const url=`${baseurl}problem/${type}/${num}/${digit}`
+    console.log(url)
    const data= await  axios.get(url)
    return data.data.data}
    catch(e){
