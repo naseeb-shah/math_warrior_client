@@ -2,8 +2,10 @@
 import React, { useState } from 'react';
 import { Box, Button, FormControl, FormLabel, Input, Stack ,Spinner, position} from '@chakra-ui/react';
 import {registerUser} from  "../utils/api"
+import { useNavigate } from 'react-router-dom';
 
 const Signup = () => {
+  const navigate= useNavigate()
 
   const [loading,setLoading]=useState(false)
 const [data,setData]=useState({
@@ -20,6 +22,7 @@ const [data,setData]=useState({
     e.preventDefault()
      await registerUser(data)
      setLoading(false)
+     navigate('/login')
   }
   
   return (

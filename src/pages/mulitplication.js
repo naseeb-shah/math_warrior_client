@@ -1,7 +1,12 @@
-import { ProblemCard } from "../components/problemcard"
+import { Heading } from "@chakra-ui/react"
+import { ProblemCard,Center } from "../components/problemcard"
+
 
 const  ProblemPage=()=>{
-    return         <ProblemCard type={"*"}  ></ProblemCard>
+    return      <>  
+    <Heading color={'goldenrod'}>Multiplication</Heading>
+     <ProblemCard type={"*"}  ></ProblemCard>
+    </>
 
 }
 export default ProblemPage 

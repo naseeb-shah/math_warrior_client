@@ -16,10 +16,13 @@ import {
   DrawerBody,
 } from '@chakra-ui/react';
 import { HamburgerIcon } from '@chakra-ui/icons';
+import { getToken } from '../utils/api';
 
 const NavBar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-
+ let token=getToken()
+ let username=localStorage.getItem("username")
+ console.log(username,token)
   return (
     <Flex p={4} bg="teal.500" color="white">
       <IconButton
@@ -50,12 +53,14 @@ const NavBar = () => {
                 <Link as={RouterLink} to="/div" fontSize="lg" mb={2}>
                   Divide
                 </Link>
-                <Link as={RouterLink} to="/login" fontSize="lg" mb={2}>
+             { !token&&!username ?<> <Link as={RouterLink} to="/login" fontSize="lg" mb={2}>
                   Login
                 </Link>
                 <Link as={RouterLink} to="/signup" fontSize="lg" mb={2}>
                   Signup
-                </Link>
+                </Link></>: <Link as={'p'}  fontSize="lg" mb={2}>
+                  {username}
+                </Link>}
               </HStack>
             </DrawerBody>
           </DrawerContent>
@@ -80,12 +85,14 @@ const NavBar = () => {
         </Link>
       </Box>
       <Spacer />
-      <Link as={RouterLink} to="/login" fontSize="lg" mr={4}>
-        Login
-      </Link>
-      <Link as={RouterLink} to="/signup" fontSize="lg">
-        Signup
-      </Link>
+      { !token&&!username ?<> <Link as={RouterLink} to="/login" fontSize="lg" mb={2}>
+                  Login
+                </Link>
+                <Link as={RouterLink} to="/signup" fontSize="lg" mb={2}>
+                  Signup
+                </Link></>: <Link as={'p'}  fontSize="lg" mb={2}>
+                  {username}
+                </Link>}
     </Flex>
   );
 };

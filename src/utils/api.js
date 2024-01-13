@@ -1,44 +1,67 @@
-import axios from "axios"
+import axios from "axios";
 
-const baseurl="https://math-warrior.vercel.app/math/"
+const baseurl = "https://math-warrior-server-b3je.vercel.app/math/";
 
-export const registerUser=async(data)=>{
-   try{
-     const res= await  axios.post(`${baseurl}auth/register`,data
-      )
-      
-      return res.data.data
+export const getToken = () => {
+  return localStorage.getItem("token");
+};
 
+export const registerUser = async (data) => {
+  try {
+    const res = await axios.post(`${baseurl}auth/register`, data);
 
-   }catch(e){
-      console.log(e)
- 
-   }
+    return res.data.data;
+  } catch (e) {
+    console.log(e);
+  }
+};
+export const logIn = async (data) => {
+  try {
+    const res = await axios.post(`${baseurl}auth/login`, data);
+    const result = res.data.data;
+    localStorage.setItem("token", result.token);
+    localStorage.setItem("username",result.user.username)
+    console.log(result)
+    return result;
+  } catch (e) {
+    console.log(e);
+  }
+};
 
-}
-export const logIn=async(data)=>{
-   try{
-     const res= await  axios.post(`${baseurl}auth/login`,data
-      )
-      
-      return res.data.data
+export const getProblem = async (num, type, digit, correct) => {
+  try {
+    const url = `${baseurl}problem/${type}/${num}/${digit}/${correct}`;
+    console.log(url);
+    const token = getToken();
 
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
 
-   }catch(e){
-      console.log(e)
- 
-   }
+    const data = await axios.get(url, config);
+    return data.data.data;
+  } catch (e) {
+    console.error(e);
+  }
+};
 
-}
+export const wrongProblem = async (problem) => {
+  try {
+    const url = `${baseurl}problem/wrong`;
+    console.log(url);
+    const token = getToken();
 
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
 
- export const  getProblem= async(num,type,digit)=>{
-    try{
-const url=`${baseurl}problem/${type}/${num}/${digit}`
-    console.log(url)
-   const data= await  axios.get(url)
-   return data.data.data}
-   catch(e){
-    console.error(e)
-   }
-}
+    const data = await axios.post(url, problem, config);
+    return data.data.data;
+  } catch (e) {
+    console.error(e);
+  }
+};
