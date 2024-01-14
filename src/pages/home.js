@@ -1,5 +1,5 @@
 
-import { Box, Center, Divider, Heading,Text,VStack ,HStack, Spacer,Stack,StackDivider,Card,CardHeader,CardBody} from "@chakra-ui/react"
+import { Box, Center, Divider, Heading,Text,VStack ,HStack, Spacer,Stack,StackDivider,Card,CardHeader,CardBody, Flex} from "@chakra-ui/react"
 import { ProblemCard } from "../components/problemcard"
 import { useEffect, useState } from "react"
 import { getProfile,getToken } from "../utils/api"
@@ -38,6 +38,8 @@ export  const Home=()=>{
 
 
 
+
+
 const AttendanceDetails = ({ data }) => {
   const {
     _id,
@@ -49,79 +51,80 @@ const AttendanceDetails = ({ data }) => {
     wrongProblems,
     createdAt,
     updatedAt,
-    username
+    username,
   } = data;
 
   return (
     <>
-    <Center>
-    <Card>
-  <CardHeader>
-    <Heading size='md'>Report</Heading>
-  </CardHeader>
+      <Center>
+        <Card>
+          <CardHeader>
+            <Heading size="md">Report</Heading>
+          </CardHeader>
 
-  <CardBody>
-    <HStack divider={<StackDivider />} spacing='4'>
-      <Box>
-        <Heading size='xs' textTransform='uppercase'>
-          Addition
-        </Heading>
-        <Text pt='2' fontSize='sm'>
-          Total Problem {addition.num}
-        </Text>
-      </Box>
-      <Box>
-        <Heading size='xs' textTransform='uppercase'>
-          Subtract
-        </Heading>
-        <Text pt='2' fontSize='sm'>
-        Total Problem {subtract.num}
-        </Text>
-      </Box>
-      <Box>
-        <Heading size='xs' textTransform='uppercase'>
-          Divide
-        </Heading>
-        <Text pt='2' fontSize='sm'>
-        Total Problem {divide.num}        </Text>
-      </Box>
+          <CardBody>
+            <HStack divider={<StackDivider />} spacing="4">
+              <Box>
+                <Heading size="xs" textTransform="uppercase">
+                  Addition
+                </Heading>
+                <Text pt="2" fontSize="sm">
+                  Total Problem {addition.num}
+                </Text>
+              </Box>
+              <Box>
+                <Heading size="xs" textTransform="uppercase">
+                  Subtract
+                </Heading>
+                <Text pt="2" fontSize="sm">
+                  Total Problem {subtract.num}
+                </Text>
+              </Box>
+              <Box>
+                <Heading size="xs" textTransform="uppercase">
+                  Divide
+                </Heading>
+                <Text pt="2" fontSize="sm">
+                  Total Problem {divide.num}
+                </Text>
+              </Box>
 
-      <Box>
-        <Heading size='xs' textTransform='uppercase'>
-          Multiplication
-        </Heading>
-        <Text pt='2' fontSize='sm'>
-        Total Problem {multiplication.num}        </Text>
-      </Box>
-
-
-
-    </HStack>
-  </CardBody>
-</Card>
-</Center>
-<Center>
-<HStack mt={25} divider={<StackDivider />}  spacing='4' boxShadow={'lg'} p={4} borderRadius={5}>
-{
-wrongProblems.map((e)=><Box  >
-<Heading size='xs' textTransform='uppercase'>
-  {e.type=="+"?"Add":e.type=="-"?"Subtract":e.type=="*"?"Multiplication":"Divide"}
-</Heading>
-<Text pt='2' fontSize='sm'>
-  {e?.num}
-       </Text>
-       <Text pt='2' fontSize='sm'>
-        {e.num2}
-       </Text>
-</Box>)
-
-
-}
-
-</HStack>
-</Center>
-</>
+              <Box>
+                <Heading size="xs" textTransform="uppercase">
+                  Multiplication
+                </Heading>
+                <Text pt="2" fontSize="sm">
+                  Total Problem {multiplication.num}
+                </Text>
+              </Box>
+            </HStack>
+          </CardBody>
+        </Card>
+      </Center>
+<Text m={25} p={1}> WrongProblems :{wrongProblems.length}</Text>
+      <Center>
+        
+        <Flex mt={25} flexWrap={{ base: "wrap" }} spacing="4" boxShadow="lg" p={4} borderRadius={5}>
+          {wrongProblems.map((e) => (
+            <Box key={e.id} p={3} boxShadow={'lg'}>
+              <Heading size="xs" textTransform="uppercase">
+                {e.type === "+" ? "Add" : e.type === "-" ? "Subtract" : e.type === "*" ? "Multiplication" : "Divide"}
+              </Heading>
+              <Text pt="2" fontSize="sm">
+                {e?.num}
+              </Text>
+              <Text pt="2" fontSize="sm">
+                {e.num2}
+              </Text>
+            </Box>
+          ))}
+        </Flex>
+      </Center>
+    </>
   );
 };
 
-export default AttendanceDetails;
+  
+
+
+
