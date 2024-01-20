@@ -23,23 +23,31 @@ export const ProblemCard = ({type}) => {
 
 
 
-  const [problemNumber,setProblemNumber]=useState(problem?.number||1)
+  const [problemNumber,setProblemNumber]=useState(1)
 const onProblemSubmit=async()=>{
     const ans= eval(`${problem?.num}${problem?.type}${problem?.num2}`)
     
     if(ans==answer){
+      setAnswer(0)
       setCorrect(true)
-        setProblemNumber(+problemNumber+1)
+        setProblemNumber(+problem?.number+1)
 setCongratulations(true)
     }else{
-       await wrongProblem(problem)
-       toast({
+      toast({
         title: 'Wrong Answer.',
         description: "Please try Again",
         status: 'warning',
         duration: 9000,
         isClosable: true,
       })
+     let wans=  document.getElementById("ans")
+    wans.style.color='red'
+    wans.style.fontWeight="900"
+    
+       await wrongProblem(problem)
+    wans.style.color='yellow'
+
+      
        
     }
     
@@ -52,7 +60,7 @@ useEffect(()=>{
             
             
             dispatch({type:action.ProblemRequest})
-            let data=  await getProblem(problemNumber,type,problem?.digit||4,correct)
+            let data=  await getProblem(problem?.number||1,type,problem?.digit||4,correct)
             dispatch({type:action.ProblemRequestSuccess,payload:data})
             
         }catch(e){
@@ -79,7 +87,7 @@ useEffect(()=>{
         p={4}
         width={{ base: "90%", md: "50%" }}
       >
-        <Text>Problem Number : {problemNumber}</Text>
+        <Text>Problem Number : {problem?.number}</Text>
         <Text fontWeight={800} fontSize={{ base: 20, md: 30 }} mb={4} textAlign={"right"}>
           {numToString(problem?.num)}
         </Text>
@@ -87,7 +95,7 @@ useEffect(()=>{
           {line2}
         </Text>
 
-        <Input
+        <Input id='ans'
           textAlign={'right'}
           placeholder="Your answer here"
           style={{ width: '100%' }}

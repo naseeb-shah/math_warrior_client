@@ -101,7 +101,7 @@ const AttendanceDetails = ({ data }) => {
           </CardBody>
         </Card>
       </Center>
-<Text m={25} p={1}> WrongProblems :{wrongProblems.length}</Text>
+<Text m={25} p={1}> Wrong Problems :{wrongProblems.length}</Text>
       <Center>
         
         <Flex mt={25} flexWrap={{ base: "wrap" }} spacing="4" boxShadow="lg" p={4} borderRadius={5}>
